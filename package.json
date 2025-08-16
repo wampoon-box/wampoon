@@ -1,5 +1,5 @@
 {
-  "name": "blue-bar",
+  "name": "wampoon-box.github.io",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/starlight": "^0.35.2",
     "astro": "^5.13.2",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.3",
+    "starlight-theme-galaxy": "^0.1.0"
   }
 }
