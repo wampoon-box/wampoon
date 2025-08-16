@@ -1,0 +1,499 @@
+---
+// Custom landing page for Wampoon - Based on Docusaurus design
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Wampoon - WAMP Stack Manager</title>
+    <meta name="description" content="Wampoon provides a simple and elegant way to manage your WAMP stack. Start, stop, and configure Apache, MariaDB, and PHP with ease." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Raccoon Night-Mode Theme (Default) */
+            --color-primary: #3a8fd0; /* Cool blue */
+            --color-primary-dark: #2b7cb8;
+            --color-secondary: #58a85e; /* Leaf green */
+            --color-accent: #ffb347; /* Warm amber */
+            --color-text: #f8f8f2; /* Soft white */
+            --color-text-secondary: #6e6e6e; /* Raccoon gray */
+            --color-background: #1c1c1e; /* Charcoal black */
+            --color-background-secondary: #1b263b; /* Deep navy */
+            --color-card: #2d2d30;
+            --color-border: #3e3e42;
+        }
+
+        [data-theme='light'] {
+            /* Light theme - "Wake the raccoon" mode */
+            --color-primary: #3a8fd0;
+            --color-primary-dark: #2b7cb8;
+            --color-secondary: #58a85e;
+            --color-accent: #ffb347;
+            --color-text: #1c1c1e;
+            --color-text-secondary: #4a5568;
+            --color-background: #f8f8f2;
+            --color-background-secondary: #edf2f7;
+            --color-card: #ffffff;
+            --color-border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-background);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-text);
+            text-decoration: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero-banner {
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 100%);
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 99, 99, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(99, 179, 237, 0.1) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            margin: 2rem 0;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title-container {
+            margin-bottom: 1rem;
+        }
+
+        .site-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+            font-family: 'Nunito Sans', sans-serif;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme='dark'] .site-title {
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .site-slogan {
+            font-size: 1.5rem;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+
+        .lead-text {
+            font-size: 1.3rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            font-weight: 400;
+            margin: 0;
+            max-width: 500px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-button {
+            background: var(--color-primary);
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+            background: var(--color-primary-dark);
+            color: white !important;
+        }
+
+        .secondary-button {
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary) !important;
+            background: transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .secondary-button:hover {
+            background: var(--color-primary);
+            transform: translateY(-2px);
+            color: white !important;
+        }
+
+        [data-theme='dark'] .secondary-button {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme='dark'] .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 1) !important;
+        }
+
+        .logo-container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .logo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        [data-theme='dark'] .features {
+            background: #1a202c;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--color-text);
+            font-weight: 800;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme='dark'] .feature-card {
+            background: #2d3748;
+            border-color: #4a5568;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 996px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-right {
+                order: -1;
+            }
+            
+            .hero-left {
+                align-items: center;
+            }
+            
+            .site-title {
+                font-size: 3rem;
+            }
+            
+            .buttons {
+                justify-content: center;
+            }
+
+            .logo-placeholder {
+                height: 250px;
+                font-size: 2rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .site-title {
+                font-size: 2.5rem;
+            }
+            
+            .site-slogan {
+                font-size: 1.2rem;
+            }
+            
+            .lead-text {
+                font-size: 1.1rem;
+            }
+            
+            .logo-container {
+                max-width: 300px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-banner {
+                padding: 2rem 0;
+            }
+
+            .logo-placeholder {
+                height: 200px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Wampoon</a>
+            <ul class="nav-links">
+                <li><a href="/getting-started/">Getting Started</a></li>
+                <li><a href="/guides/example/">Guides</a></li>
+                <li><a href="https://github.com/wampoon-box/wampoon-box.github.io">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-left">
+                        <div class="title-container">
+                            <div class="site-title">Wampoon</div>
+                            <div class="site-slogan">WAMP Stack Manager</div>
+                        </div>
+                        <p class="lead-text">
+                            Wampoon provides a simple and elegant way to manage your WAMP stack.
+                            Start, stop, and configure Apache, MariaDB, and PHP with ease.
+                        </p>
+                        <div class="buttons">
+                            <a href="/getting-started/" class="btn primary-button">Get Started</a>
+                            <a href="/guides/example/" class="btn secondary-button">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="hero-right">
+                        <div class="logo-container">
+                            <div class="logo-placeholder">
+                                WAMPoon
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why Choose Wampoon?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Easy Setup</h3>
+                        <p>Get your WAMP development environment up and running in minutes with our streamlined installation process.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>High Performance</h3>
+                        <p>Optimized for speed and efficiency, ensuring your development workflow is smooth and productive.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Simple Management</h3>
+                        <p>Easily start, stop, and configure Apache, MariaDB, and PHP services with our intuitive interface.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Developer Tools</h3>
+                        <p>Includes essential development tools and utilities to enhance your local development experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Comprehensive Docs</h3>
+                        <p>Detailed documentation and guides to help you make the most of your WAMP stack setup.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌟</div>
+                        <h3>Open Source</h3>
+                        <p>Built with transparency and community collaboration at its core, completely free to use.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Wampoon. Licensed under the MIT License.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>
