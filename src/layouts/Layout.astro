@@ -1,0 +1,115 @@
+---
+export interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description = "Wampoon provides a simple and elegant way to manage your WAMP stack. Start, stop, and configure Apache, MariaDB, and PHP with ease." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Paw Print Loading Spinner -->
+    <div class="paw-loading" id="pawLoader">
+        <div class="paw-step"></div>
+        <div class="paw-step"></div>
+        <div class="paw-step"></div>
+        <div class="paw-step"></div>
+    </div>
+
+    <slot />
+
+    <script>
+        // Paw loading animation
+        function showPawLoading() {
+            const loader = document.getElementById('pawLoader');
+            if (loader) {
+                loader.classList.add('active');
+            }
+        }
+
+        function hidePawLoading() {
+            const loader = document.getElementById('pawLoader');
+            if (loader) {
+                loader.classList.remove('active');
+            }
+        }
+
+        // Global theme toggle function - "Wake the raccoon!"
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Show paw loading animation
+            showPawLoading();
+            
+            // Small delay for the animation to be visible
+            setTimeout(() => {
+                body.setAttribute('data-theme', newTheme);
+                // Sync with both our theme system and Starlight's
+                localStorage.setItem('theme', newTheme);
+                localStorage.setItem('starlight-theme', newTheme);
+                updateThemeButton(newTheme);
+                
+                // Hide loading after theme change
+                setTimeout(hidePawLoading, 800);
+            }, 200);
+        }
+
+        function updateThemeButton(theme) {
+            const toggleButton = document.querySelector('.theme-toggle');
+            const tooltipText = document.getElementById('tooltip-text');
+            
+            if (toggleButton) {
+                toggleButton.textContent = theme === 'dark' ? '🗑️' : '🛏️';
+            }
+            
+            if (tooltipText) {
+                if (theme === 'dark') {
+                    tooltipText.innerHTML = '<span class="raccoon-emoji">🦝</span> Send raccoon to bed';
+                } else {
+                    tooltipText.innerHTML = '<span class="raccoon-emoji">🦝</span> Wake raccoon for night foraging';
+                }
+            }
+        }
+
+        // Initialize theme when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme, prioritizing Starlight's theme if available
+            const starlightTheme = localStorage.getItem('starlight-theme');
+            const ourTheme = localStorage.getItem('theme');
+            const savedTheme = starlightTheme || ourTheme || 'dark';
+            
+            // Sync both localStorage keys
+            localStorage.setItem('theme', savedTheme);
+            localStorage.setItem('starlight-theme', savedTheme);
+            
+            document.body.setAttribute('data-theme', savedTheme);
+            updateThemeButton(savedTheme);
+
+            // Add click event listener to theme toggle button
+            const toggleButton = document.querySelector('.theme-toggle');
+            if (toggleButton) {
+                toggleButton.addEventListener('click', toggleTheme);
+            }
+        });
+    </script>
+</body>
+</html>
+
+<style is:global>
+    @import '../styles/global.css';
+</style>

@@ -1,0 +1,14 @@
+@layer Starlight, wampoon;
+
+@layer wampoon {
+  /* Simple Starlight header background override */
+  .header {
+    background: rgba(28, 28, 30, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+
+  /* Light theme */
+  [data-theme='light'] .header {
+    background: rgba(248, 248, 242, 0.9) !important;
+  }
+}

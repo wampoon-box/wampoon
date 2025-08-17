@@ -9,7 +9,10 @@ export default defineConfig({
   base: "/",
   integrations: [
     starlight({
-      title: "Wampoon Box",      
+      title: "Wampoon Box",            
+      customCss: [
+        "/src/styles/docs-custom.css",
+      ],
       social: [
         {
           icon: "github",
