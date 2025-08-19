@@ -1,42 +1,56 @@
 ---
-title: Getting Started
+title: Installation and Setup
 description: Get started with Wampoon Box and learn how to set up your development environment.
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+
 
 # Getting Started with Wampoon
 
 Welcome to Wampoon! This guide will help you get started with the Wampoon local development stack.
 
-## Installation
+:::caution[Prerequisites]
+Operating System: Windows 10 or Windows 11
+:::
 
-Follow these steps to set up Wampoon on your system:
+## Installing Wampoon
 
-1. **Prerequisites**: Ensure you have the necessary dependencies installed
-2. **Download**: Get the latest version of Wampoon
-3. **Setup**: Configure your development environment
-4. **Verification**: Test that everything is working correctly
+:::note
+Wampoon can be installed in **two different ways**, depending on your preference:
+:::
 
-## Quick Start
+### 1. Using the Installer
 
-<CardGrid stagger>
-	<Card title="Install Dependencies" icon="setting">
-		Install the required tools and dependencies for your development environment.
-	</Card>
-	<Card title="Create Project" icon="add-document">
-		Set up a new project using the Wampoon stack and templates.
-	</Card>
-	<Card title="Development Server" icon="rocket">
-		Start the development server and begin building your application.
-	</Card>
-	<Card title="Learn More" icon="open-book">
-		Explore the guides and documentation to master Wampoon.
-	</Card>
-</CardGrid>
+This option provides a guided setup process.
 
-## Next Steps
+1. Download the latest installer package:
+<LinkButton  href="https://github.com/wampoon-box/wampoon-installer/releases/latest/download/Wampoon-Installer.zip" variant="primary"  icon="external" iconPlacement="end">
+  Wampoon-Installer.zip
+</LinkButton>
+2. Extract the contents of the ZIP file to a local folder.
+3. Run **`Wampoon-Installer.exe`** and follow the instructions.
 
-- Check out the [Example Guide](/guides/example/) for a hands-on tutorial
-- Browse the [Reference](/reference/) documentation for detailed API information
-- Visit our [GitHub repository](https://github.com/wampoon-box/wampoon-box.github.io) to contribute
+### 2. Using the Portable Bundle
+
+This option gives you a **preconfigured**, portable Wampoon environment that runs without installation.
+
+1. Download the portable package:
+<LinkButton  href="https://github.com/wampoon-box/wampoon-installer/releases/latest/download/Wampoon-portable-1.0.0.zip" variant="primary"  icon="external" iconPlacement="end">
+  Wampoon-portable-1.0.0.zip
+</LinkButton>   
+2. Extract the contents to a folder of your choice.
+3. Run **`WampoonControl.exe`** to start using Wampoon.
+
+The portable bundle comes preconfigured with the following components:
+
+* **Apache HTTP Server** — 2.4.65.0
+* **MariaDB Server** — 11.8.3.0
+* **PHP Runtime** — 8.4.10.0
+* **phpMyAdmin** — 5.2.2.0
+* **wampoon-dashboard** — latest
+* **Wampoon Control Panel** — latest
+* **Xdebug** — 3.4.5.0
+* **Composer** — 2.8.10.0
+* **Microsoft Visual C++ Runtime** — 14.0.0.0
+* **browscap** — latest

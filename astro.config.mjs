@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightThemeGalaxy from "starlight-theme-galaxy";
+import starlightImageZoom from "starlight-image-zoom";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,6 +23,7 @@ export default defineConfig({
       ],
       plugins: [
         starlightThemeGalaxy(),
+        starlightImageZoom(),
       ],
       sidebar: [
         {
@@ -33,8 +35,10 @@ export default defineConfig({
         {
           label: "Guides",
           items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
+            // { label: "Guides", slug: "guides/index" },
+            { label: "Wampoon Control Panel", slug: "guides/wampoon-control" },
+            { label: "Wampoon Dashboard", slug: "guides/wampoon-dashboard" },
+            { label: "Wampoon Installer", slug: "guides/wampoon-installer" },
           ],
         },
         {
