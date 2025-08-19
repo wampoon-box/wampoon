@@ -32,7 +32,7 @@ const { title, description = "Wampoon provides a simple and elegant way to manag
     <slot />
 
     <script>
-        // Paw loading animation
+        // Paw loading animation.
         function showPawLoading() {
             const loader = document.getElementById('pawLoader');
             if (loader) {
@@ -47,24 +47,24 @@ const { title, description = "Wampoon provides a simple and elegant way to manag
             }
         }
 
-        // Global theme toggle function - "Wake the raccoon!"
+        // Global theme toggle function - "Wake the raccoon!".
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme') || 'dark';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
-            // Show paw loading animation
+            // Show paw loading animation.
             showPawLoading();
             
-            // Small delay for the animation to be visible
+            // Small delay for the animation to be visible.
             setTimeout(() => {
                 body.setAttribute('data-theme', newTheme);
-                // Sync with both our theme system and Starlight's
+                // Sync with both our theme system and Starlight's.
                 localStorage.setItem('theme', newTheme);
                 localStorage.setItem('starlight-theme', newTheme);
                 updateThemeButton(newTheme);
                 
-                // Hide loading after theme change
+                // Hide loading after theme change.
                 setTimeout(hidePawLoading, 800);
             }, 200);
         }
@@ -86,21 +86,21 @@ const { title, description = "Wampoon provides a simple and elegant way to manag
             }
         }
 
-        // Initialize theme when page loads
+        // Initialize theme when page loads.
         document.addEventListener('DOMContentLoaded', function() {
-            // Load saved theme, prioritizing Starlight's theme if available
+            // Load saved theme, prioritizing Starlight's theme if available.
             const starlightTheme = localStorage.getItem('starlight-theme');
             const ourTheme = localStorage.getItem('theme');
             const savedTheme = starlightTheme || ourTheme || 'dark';
             
-            // Sync both localStorage keys
+            // Sync both localStorage keys.
             localStorage.setItem('theme', savedTheme);
             localStorage.setItem('starlight-theme', savedTheme);
             
             document.body.setAttribute('data-theme', savedTheme);
             updateThemeButton(savedTheme);
 
-            // Add click event listener to theme toggle button
+            // Add click event listener to theme toggle button. 
             const toggleButton = document.querySelector('.theme-toggle');
             if (toggleButton) {
                 toggleButton.addEventListener('click', toggleTheme);

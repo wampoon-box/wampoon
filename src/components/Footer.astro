@@ -4,7 +4,12 @@
 
 <footer>
   <div class="container">
-    <p>&copy; 2025-present Wampoon. Licensed under the MIT License.</p>
+    <p>&copy; 2025-present <a href="https://github.com/wampoon-box" target="_blank" rel="noopener noreferrer">Wampoon Box</a>. 
+    </p>
+    <a href="https://starlight.astro.build" target="_blank" rel="noopener noreferrer">
+      <img src="https://astro.badg.es/v2/built-with-starlight/tiny.svg" alt="Built with Astro and Starlight" />
+    </a>
+  </p>
   </div>
 </footer>
 
@@ -14,5 +19,21 @@
     color: white;
     text-align: center;
     padding: 3rem 0;
+  }
+
+  footer a {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+  }
+
+  footer a:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+  }
+
+  footer a:focus {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
   }
 </style>
