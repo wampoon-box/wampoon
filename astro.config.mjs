@@ -10,7 +10,8 @@ export default defineConfig({
   base: "/",
   integrations: [
     starlight({
-      title: "Wampoon Box",            
+      title: "Wampoon Box",                  
+      favicon: "/favicon.svg",
       customCss: [
         "/src/styles/docs-custom.css",
       ],
@@ -30,15 +31,16 @@ export default defineConfig({
           label: "Getting Started",
           items: [
             { label: "Getting Started", slug: "getting-started" },
+            { label: "Installing Wampoon on a USB", slug: "guides/wampoon-usb" },
           ],
         },
         {
           label: "Guides",
           items: [
             // { label: "Guides", slug: "guides/index" },
-            { label: "Wampoon Control Panel", slug: "guides/wampoon-control" },
-            { label: "Wampoon Dashboard", slug: "guides/wampoon-dashboard" },
-            { label: "Wampoon Installer", slug: "guides/wampoon-installer" },
+            { label: "Control Panel", slug: "guides/wampoon-control" },
+            { label: "Dashboard", slug: "guides/wampoon-dashboard" },
+            { label: "Installer", slug: "guides/wampoon-installer" },
           ],
         },
         {
